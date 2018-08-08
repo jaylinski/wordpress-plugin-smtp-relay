@@ -20,6 +20,7 @@ class SMTPRelayAdmin
     {
         add_action('admin_menu', [$this, 'add_plugin_page']);
         add_action('admin_init', [$this, 'add_plugin_settings']);
+        add_action('wp_ajax_' . SMTP_RELAY_SLUG . '_test', [$this, 'action_test']);
         add_filter('plugin_action_links_' . SMTP_RELAY_FILE_NAME, [$this, 'add_action_links']);
     }
 
@@ -37,7 +38,6 @@ class SMTPRelayAdmin
         );
 
         add_action('admin_footer-' . $page, [$this, 'add_script']);
-        add_action('wp_ajax_' . SMTP_RELAY_SLUG . '_test', [$this, 'action_test']);
     }
 
     /**

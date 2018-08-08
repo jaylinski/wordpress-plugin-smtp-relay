@@ -25,6 +25,11 @@ Upload the SMTP Relay plugin to your blog, activate it, then configure it.
 
 == Changelog ==
 
+= 0.1.1 =
+*Release Date - 2018-08-08*
+
+* Include script only on settings page
+
 = 0.1.0 =
 *Release Date - 2018-07-30*
 
