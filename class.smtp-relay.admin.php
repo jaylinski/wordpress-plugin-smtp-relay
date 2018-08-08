@@ -12,16 +12,14 @@ class SMTPRelayAdmin
     ];
 
     /**
-     * Holds the values to be used in the fields callbacks.
+     * @var mixed Holds the values to be used in the fields callbacks.
      */
     private $options;
 
     public function __construct()
     {
         add_action('admin_menu', [$this, 'add_plugin_page']);
-        add_action('admin_init', [$this, 'page_init']);
-        add_action('admin_footer', [$this, 'add_script']);
-        add_action('wp_ajax_smtp_relay_test', [$this, 'action_test']);
+        add_action('admin_init', [$this, 'add_plugin_settings']);
         add_filter('plugin_action_links_' . SMTP_RELAY_FILE_NAME, [$this, 'add_action_links']);
     }
 
@@ -30,13 +28,16 @@ class SMTPRelayAdmin
      */
     public function add_plugin_page()
     {
-        add_options_page(
+        $page = add_options_page(
             __('SMTP Relay', 'smtp-relay'),
             __('SMTP Relay', 'smtp-relay'),
             'manage_options',
             SMTP_RELAY_SLUG,
             [$this, 'render_options_page']
         );
+
+        add_action('admin_footer-' . $page, [$this, 'add_script']);
+        add_action('wp_ajax_' . SMTP_RELAY_SLUG . '_test', [$this, 'action_test']);
     }
 
     /**
@@ -77,7 +78,7 @@ class SMTPRelayAdmin
     /**
      * Register and add settings.
      */
-    public function page_init()
+    public function add_plugin_settings()
     {
         register_setting(self::OPTION_GROUP_NAME, self::OPTION_NAME, [$this, 'sanitize']);
 
@@ -243,7 +244,7 @@ class SMTPRelayAdmin
                     event.preventDefault();
 
                     var data = {
-                        'action': 'smtp_relay_test',
+                        'action': '<?php echo SMTP_RELAY_SLUG; ?>_test',
                         'email': $('#smtp_relay_test').val(),
                         'security': '<?php echo $ajax_nonce; ?>',
                     };
