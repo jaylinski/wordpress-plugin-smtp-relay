@@ -23,6 +23,10 @@ This plugin only works with unauthenticated SMTP relays!
 
 Upload the SMTP Relay plugin to your blog, activate it, then configure it.
 
+== Screenshots ==
+
+1. Admin Interface
+
 == Changelog ==
 
 = 0.1.1 =
