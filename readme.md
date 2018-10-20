@@ -1,4 +1,4 @@
-# SMTP Relay Wordpress Plugin
+# SMTP Relay WordPress Plugin
 
 This plugin lets you configure a SMTP relay for outgoing emails.
 
