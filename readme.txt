@@ -2,7 +2,7 @@
 Contributors: jakobword
 Tags: smtp, mail, relay
 Requires at least: 4.9
-Tested up to: 4.9
+Tested up to: 5.7
 Stable tag: 0.1
 Requires PHP: 7.0
 License: GPLv2 or later
