@@ -1,0 +1,13 @@
+{
+    "name": "jaylinski/wordpress-plugin-smtp-relay",
+    "description": "Configure a SMTP relay for outgoing emails",
+    "type": "package",
+    "license": "MIT",
+    "require-dev": {
+        "szepeviktor/phpstan-wordpress": "^1.0",
+        "phpmailer/phpmailer": "^6.5"
+    },
+    "scripts": {
+        "analyse": "phpstan"
+    }
+}

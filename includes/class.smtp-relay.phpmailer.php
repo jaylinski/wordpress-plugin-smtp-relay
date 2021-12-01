@@ -7,22 +7,25 @@ class SMTPRelayPHPMailer
         add_action('phpmailer_init', [$this, 'init']);
     }
 
-    public static function getDefaultPort()
+    public static function getDefaultPort(): int
     {
         return 587;
     }
 
-    public static function getDefaultFrom()
+    public static function getDefaultFrom(): string
     {
         return get_bloginfo('name');
     }
 
-    public static function getDefaultFromAddress()
+    public static function getDefaultFromAddress(): string
     {
         return 'wordpress@' . parse_url(get_bloginfo('url'), PHP_URL_HOST);
     }
 
-    public function init($phpmailer)
+    /**
+     * @param \PHPMailer\PHPMailer\PHPMailer $phpmailer
+     */
+    public function init($phpmailer): void
     {
         $options = get_option(SMTPRelayAdmin::OPTION_NAME);
 

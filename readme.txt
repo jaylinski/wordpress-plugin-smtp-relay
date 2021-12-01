@@ -2,9 +2,9 @@
 Contributors: jakobword
 Tags: smtp, mail, relay
 Requires at least: 4.9
-Tested up to: 5.7
-Stable tag: 0.1
-Requires PHP: 7.0
+Tested up to: 5.9
+Stable tag: 1.0
+Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,6 +28,12 @@ Upload the SMTP Relay plugin to your blog, activate it, then configure it.
 1. Admin Interface
 
 == Changelog ==
+
+= 1.0.0 =
+*Release Date - 2021-12-02*
+
+* Code improvements
+* Dropped support for outdated PHP versions
 
 = 0.1.1 =
 *Release Date - 2018-08-08*
