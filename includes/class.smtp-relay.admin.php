@@ -2,9 +2,9 @@
 
 class SMTPRelayAdmin
 {
-    const OPTION_GROUP_NAME = 'smtp_relay_option_group';
-    const OPTION_NAME = 'smtp_relay_options';
-    const OPTIONS = [
+    private const OPTION_GROUP_NAME = 'smtp_relay_option_group';
+    public const OPTION_NAME = 'smtp_relay_options';
+    public const OPTIONS = [
         'host' => 'smtp_relay_host',
         'port' => 'smtp_relay_port',
         'from' => 'smtp_relay_from',
@@ -27,7 +27,7 @@ class SMTPRelayAdmin
     /**
      * Add options page.
      */
-    public function add_plugin_page()
+    public function add_plugin_page(): void
     {
         $page = add_options_page(
             __('SMTP Relay', 'smtp-relay'),
@@ -42,11 +42,8 @@ class SMTPRelayAdmin
 
     /**
      * Add settings link to plugins page.
-     *
-     * @param $links
-     * @return array
      */
-    public function add_action_links($links)
+    public function add_action_links(array $links): array
     {
         $plugin_links = [
             '<a href="' . admin_url( 'options-general.php?page=' . SMTP_RELAY_SLUG ) . '">' . __('Settings') . '</a>',
@@ -58,7 +55,7 @@ class SMTPRelayAdmin
     /**
      * Options page callback.
      */
-    public function render_options_page()
+    public function render_options_page(): void
     {
         $this->options = get_option(self::OPTION_NAME);
         ?>
@@ -78,14 +75,14 @@ class SMTPRelayAdmin
     /**
      * Register and add settings.
      */
-    public function add_plugin_settings()
+    public function add_plugin_settings(): void
     {
         register_setting(self::OPTION_GROUP_NAME, self::OPTION_NAME, [$this, 'sanitize']);
 
         add_settings_section(
             'smtp_relay_section_settings',
             __('Settings'),
-            null,
+            [$this, 'settings_section'],
             SMTP_RELAY_SLUG
         );
 
@@ -119,7 +116,7 @@ class SMTPRelayAdmin
         add_settings_section(
             'smtp_relay_section_test',
             __('Test'),
-            null,
+            [$this, 'settings_section'],
             SMTP_RELAY_SLUG
         );
 
@@ -136,8 +133,8 @@ class SMTPRelayAdmin
     /**
      * Sanitize each setting field as needed.
      *
-     * @param array $input Contains all settings fields as array keys.
-     * @return array
+     * @param mixed $input Contains all settings fields as array keys.
+     * @return mixed
      */
     public function sanitize($input)
     {
@@ -146,7 +143,12 @@ class SMTPRelayAdmin
         }, $input) : $input;
     }
 
-    public function option_host()
+    public function settings_section(array $arg): void
+    {
+        // Noop
+    }
+
+    public function option_host(): void
     {
         printf(
             '<input type="text" class="regular-text code" id="%s" name="%s[%s]" value="%s" placeholder="smtp.example.local">',
@@ -173,7 +175,7 @@ class SMTPRelayAdmin
         );
     }
 
-    public function option_from()
+    public function option_from(): void
     {
         printf(
             '<input type="text" class="regular-text" id="%s" name="%s[%s]" value="%s" placeholder="%s">',
@@ -190,7 +192,7 @@ class SMTPRelayAdmin
         );
     }
 
-    public function option_from_address()
+    public function option_from_address(): void
     {
         printf(
             '<input type="text" class="regular-text" id="%s" name="%s[%s]" value="%s" placeholder="%s">',
@@ -207,7 +209,7 @@ class SMTPRelayAdmin
         );
     }
 
-    public function option_test()
+    public function option_test(): void
     {
         printf(
             '<input type="text" class="regular-text" id="smtp_relay_test" name="smtp_relay_test" placeholder="test@example.com" %s>' .
@@ -218,7 +220,7 @@ class SMTPRelayAdmin
         );
     }
 
-    public function action_test()
+    public function action_test(): void
     {
         check_ajax_referer(SMTP_RELAY_SLUG, 'security');
 
@@ -233,7 +235,7 @@ class SMTPRelayAdmin
         }
     }
 
-    public function add_script()
+    public function add_script(): void
     {
         $ajax_nonce = wp_create_nonce(SMTP_RELAY_SLUG);
         ?>

@@ -1,0 +1,10 @@
+includes:
+    - vendor/szepeviktor/phpstan-wordpress/extension.neon
+parameters:
+    level: 8
+    checkMissingIterableValueType: false
+    bootstrapFiles:
+        - smtp-relay.php
+    paths:
+        - includes/
+        - smtp-relay.php
