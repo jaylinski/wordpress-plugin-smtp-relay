@@ -3,7 +3,7 @@
 /*
 Plugin Name: SMTP Relay
 Description: Configure a SMTP relay for outgoing emails.
-Version: 1.0.0
+Version: 1.0.1
 Author: jakobword
 License: GPLv2 or later
 Text Domain: smtp-relay
@@ -20,7 +20,7 @@ function smtp_relay_init(): void
     new SMTPRelayPHPMailer();
 }
 
-if (is_admin()) {
+if (is_admin() && current_user_can('manage_options')) {
     new SMTPRelayAdmin();
 }
 
